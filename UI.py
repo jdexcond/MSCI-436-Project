@@ -13,7 +13,8 @@ def user_input():
     children = float(st.number_input('Num. of Children:'))
     smoker = int(convert_smoker(st.radio('Smoker:', options = ['Y', 'N'])))
 
-    return pd.DataFrame([age, sex, bmi, children, smoker], columns = ['age', 'sex', 'bmi', 'children', 'smoker'])
+    return pd.DataFrame({'age': [age], 'sex': [sex], 'bmi': [bmi], 'children':[children], 'smoker':[smoker]})
+
 
 def convert_sex(input): 
     return 1 if input=='M' else 0 
@@ -27,4 +28,5 @@ with st.form(key='input'):
 
 X = df
 
-print(X.shape)
+output = model.predict(X)
+st.write(output)

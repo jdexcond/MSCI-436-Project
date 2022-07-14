@@ -1,5 +1,6 @@
 import pickle
 import streamlit as st
+import pandas as pd
 model = pickle.load(open('lrmodel.pkl','rb'))
 
 st.title('Insurance Claims Charges Predictor')
@@ -12,6 +13,8 @@ def user_input():
     children = float(st.number_input('Num. of Children:'))
     smoker = int(convert_smoker(st.radio('Smoker:', options = ['Y', 'N'])))
 
+    return pd.DataFrame([age, sex, bmi, children, smoker], columns = ['age', 'sex', 'bmi', 'children', 'smoker'])
+
 def convert_sex(input): 
     return 1 if input=='M' else 0 
 
@@ -19,5 +22,9 @@ def convert_smoker(input):
     return 1 if input=='Y' else 0 
 
 with st.form(key='input'): 
-    df = user_input() 
+    df = user_input()
     st.form_submit_button('Submit')
+
+X = df
+
+print(X.shape)

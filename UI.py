@@ -29,4 +29,7 @@ with st.form(key='input'):
 X = df
 
 output = model.predict(X)
-st.write(output)
+
+
+st.header('Predicted Insurance Charge:')
+st.header('$' + str(round(output[0],2)))
